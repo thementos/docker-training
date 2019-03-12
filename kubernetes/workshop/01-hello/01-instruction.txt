@@ -42,3 +42,8 @@ $kubectl run hello --image=somkiat/hello:latest --port=8080 --generator=run/v1
 
     $curl  http://$SERVICE
     Hello, "/" on hello-lw2p7
+
+5. Delete
+    $kubectl delete rc <name>
+    $kubectl delete pod <name>
+    $kubectl delete service <name>
