@@ -1,0 +1,44 @@
+0. เตรียมความพร้อม
+- connect to gcp cluster
+    - kubeclt get nodes
+    - kubeclt describe nodes
+    - kubeclt get cs //
+    - kubeclt get pods
+
+1. Create a container
+# Create with Replication controller
+$kubectl run hello --image=somkiat/hello:latest --port=8080 --generator=run/v1
+
+- List of POD
+    $kubectl get pods
+    $kubectl get pods -o wide
+    $kubectl describe pods
+- List of ReplicationController
+    $kubectl get replicationcontrollers
+    $kubectl get rc
+
+
+2 Expose service
+    $kubectl expose rc hello --type=LoadBalancer --name hello-http
+    $kubeclt get services
+    $kubeclt get svc
+
+    // go to k8s look LoadBalanceIP
+    // try to curl or web browser
+
+3. Scale up of Pods on the ReplicationController
+    $kubectl scale rc hello --replicas=3
+    $kubectl get rc
+    $kubectl scale rc hello --replicas=3
+    $kubectl get rc
+
+4. Testing
+    $export SERVICE=192.168.99.100:32614
+    $curl  http://$SERVICE
+    Hello, "/" on hello-wwsnh
+
+    $curl  http://$SERVICE 
+    Hello, "/" on hello-pqnzp
+
+    $curl  http://$SERVICE
+    Hello, "/" on hello-lw2p7
