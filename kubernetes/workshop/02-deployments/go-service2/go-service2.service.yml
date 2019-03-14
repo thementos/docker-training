@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-service2
+  labels:
+    app: go-service2
+spec:
+  type: ClusterIP
+  ports:
+    - name: go-service2-http
+      port: 8100
+      targetPort: 8100
+      protocol: TCP
+  selector:
+    app: go-service2

@@ -1,0 +1,25 @@
+1. create deployment
+    $kubectl run go-service1 --image=thementos/go-service1 --env="PORT=0.0.0.0:8000" --port=8000
+    $kubectl get pod
+    $kubectl get deployment
+    $kubectl describe deployment
+
+    เปิด gce console สำหรับ ดูการ deployment 
+
+2. create deployment go-service1 from yaml
+    $cd kubernetes/workshop/02-deployments/go-service1
+    $kubectl create -f go-service1.deployment.yaml
+
+    -- edit : บน console
+
+3. create service from yaml
+    $kubectl create -f go-service1.service.yaml
+
+    - open firewall
+    $gcloud compute firewall-rules create myservice --allow tcp:30080,tcp:30443
+
+4. create configMap
+
+5. create Secret
+
+6. create deployment go-service2
