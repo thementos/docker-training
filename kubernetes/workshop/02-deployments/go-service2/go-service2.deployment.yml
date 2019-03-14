@@ -17,11 +17,17 @@ spec:
       containers:
         - env:
           - name: PORT
-            value: 0.0.0.0:8100
+            value: :8100
           image: thementos/go-service2
           imagePullPolicy: Always
           name: go-service2
           ports:
           - containerPort: 8100
-            protocol: TCP
+            protocol: 
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8200
+            initialDelaySeconds: 3
+            periodSeconds: 3
         

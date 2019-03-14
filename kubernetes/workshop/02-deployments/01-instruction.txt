@@ -8,18 +8,40 @@
 
 2. create deployment go-service1 from yaml
     $cd kubernetes/workshop/02-deployments/go-service1
-    $kubectl create -f go-service1.deployment.yaml
+    $kubectl create -f go-service1.deployment.yml
 
     -- edit : บน console
 
 3. create service from yaml
-    $kubectl create -f go-service1.service.yaml
+    $kubectl create -f go-service1.service.yml
 
     - open firewall
     $gcloud compute firewall-rules create myservice --allow tcp:30080,tcp:30443
 
 4. create configMap
+    $kubectl create -f go-service1.config.yml
 
-5. create Secret
+    delete old deployment
+    $kubectl delete deployments go-service1
+    $kubectl create -f go-service1-v2.deployment.yml
+
+
 
 6. create deployment go-service2
+    $cd kubernetes/workshop/02-deployments/go-service2
+
+    - Liveness vs Readiness
+        $kubectl create -f go-service2.deployment.yml
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8200 <--- ใส่ port ผิด
+            initialDelaySeconds: 3
+            periodSeconds: 3
+
+            รอประมาณ 9 วินาที ดูผลที่ consloe
+
+            แก้ port 8100
+
+            ดูผลอีกครั้ง
