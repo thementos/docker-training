@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-service1
+  labels:
+    app: go-service1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-service1
+  template:
+    metadata:
+      labels:
+        app: go-service1
+    spec:
+      containers:
+        - env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: go-sv1-config
+                key: PORT
+          - name: SERVICE_2_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: go-sv1-config
+                key: SERVICE_2_NAME
+          envFrom:
+          - configMapRef:
+              name: go-sv1-config
+          image: thementos/go-service1
+          imagePullPolicy: Always
+          name: go-service1
+          ports:
+          - containerPort: 8000
+            protocol: TCP
+        
