@@ -4,4 +4,4 @@ metadata:
   name: go-sv1-config
 data:
   PORT: :8000
-  SERVICE_2_NAME: http://go-serivce2:8100
+  SERVICE_2_NAME: http://go-service2:8100
